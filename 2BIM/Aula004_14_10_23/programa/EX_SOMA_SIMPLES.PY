@@ -1,13 +1,51 @@
-from funcoes import retornaNumero
-from funcoes import somaSimples
+def leitura(nome_arquivo: str):
+    try:
+        lista = []
+        with open(nome_arquivo, 'r') as arquivo:
+            arquivo.seek(0) # posicionando cursor no inicio
+            for linha in arquivo:
+                linha = linha.strip()
+                if linha.isdigit():
+                    valor =  float(linha)
+                    lista.append(valor)
+            return lista
+    except Exception as e:
+        print("Houve uma falha na abertura do arquivo")
+        print(e)
+        return None
 
-try:
-    with open('2BIM\\Aula004_14_10_23\\programa\\arquivoTxt\\entrada.txt', 'w') as txtFile:
-        num1 = retornaNumero()
-        num2 = retornaNumero()
-        res = somaSimples(num1, num2)
-        print(res)
-        txtFile.write(f"\nEntrada: \n {str(num1)}\n {str(num2)}\n\n{str(res)}")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+def soma_valores_arquivo():
+    valores = leitura("ED_2PSI_2023\\2BIM\\Aula004_14_10_23\\programa\\entrada.txt")
+    print("="*50)
+    print("SOMA")
+    return sum(valores)
 
+# EXERCICIOS 16/11/2023 
+def maior_valor_arquivo():
+    maior = leitura("ED_2PSI_2023\\2BIM\\Aula004_14_10_23\\programa\\entrada.txt")
+    print("="*50)
+    print("MAIOR DA LISTA")
+    return max(maior)
+    
+def multiplica_valores_arquivo():
+    maior = leitura("ED_2PSI_2023\\2BIM\\Aula004_14_10_23\\programa\\entrada.txt")
+    mult = 1
+    for valor in maior:
+        mult *= valor
+    print("="*50)
+    print("MULTIPLICAÇÃO")
+    return mult
+
+if __name__ == '__main__':
+
+    resultado = soma_valores_arquivo()
+    print(resultado)
+
+    maior = maior_valor_arquivo()
+    print(maior)
+    
+    mult = multiplica_valores_arquivo()
+    print(mult)
+    
+    
+   
